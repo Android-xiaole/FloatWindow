@@ -1,0 +1,32 @@
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+//        applicationId "com.example.adwindow"
+        minSdkVersion 8
+        targetSdkVersion 19
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    task makeJar(type: Copy) {
+        delete 'build/libs/ftSDK.jar' //删除已经存在的jar包
+        from('build/intermediates/bundles/release/')//从该目录下加载要打包的文件
+        into('build/libs/')//jar包的保存目录
+        include('classes.jar')//设置过滤，只打包classes文件
+        rename('classes.jar', 'ftSDK.jar')//重命名，ftSDK.jar 根据自己的需求设置
+    }
+    makeJar.dependsOn(build)
+}
+
+dependencies {
+    compile files('libs/eventbus-3.0.0.jar')
+}
