@@ -21,7 +21,6 @@ public class Main extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: " );
-
 //测试提交
 //        FtSDK.init().setDebug(true).setGravity(FtGravity.TOP).setType(FtType.POPWINDOW).start(this);
         FtSDK.init().setDebug(true).setGravity(FtGravity.BOTTOM).setType(FtType.SERVICE).start(this);
