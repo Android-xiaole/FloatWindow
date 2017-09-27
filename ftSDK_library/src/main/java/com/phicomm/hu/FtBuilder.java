@@ -15,5 +15,6 @@ public interface FtBuilder {
     FtSDK setType(FtType type);
     FtSDK setGravity(FtGravity gravity);
     FtSDK setDebug(boolean debug);
-    FtSDK start(Activity context);
+    FtSDK setTime(int time);
+    void start(Activity context);
 }

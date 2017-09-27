@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.phicomm.hu.Utils.MLog;
 import com.phicomm.hu.Utils.ParserUrl;
 
 /**
@@ -27,6 +28,9 @@ public class FloatPopwindow extends PopupWindow{
 
     public void showPop(View v){
         if (!this.isShowing()){
+            if (FtSDK.COUNT_TIME >= FtSDK.TIME){
+                return;
+            }
             floatView.startTask();
             this.showAtLocation(v, FtSDK.GRAVITY.value(),0,0);
         }

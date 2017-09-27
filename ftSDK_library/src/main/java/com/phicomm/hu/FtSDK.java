@@ -21,6 +21,8 @@ public class FtSDK implements FtBuilder{
     private static FtType type = FtType.SERVICE;//默认是service类型
     public static FtGravity GRAVITY = FtGravity.BOTTOM;//默认显示在屏幕最下方
     public static boolean DEBUG = false;//默认关闭调试
+    public static int TIME = 3;//默认最多弹出三次
+    public static int COUNT_TIME;//标记关闭弹窗的次数
 
     public static FloatPopwindow popwindow;
     private Activity context;
@@ -64,12 +66,23 @@ public class FtSDK implements FtBuilder{
     }
 
     /**
+     * 设置广告弹出次数
+     * @param time
+     * @return
+     */
+    @Override
+    public FtSDK setTime(int time) {
+        this.TIME = time;
+        return this;
+    }
+
+    /**
      * 如果是FtType.POPWINDOW 必须在activity onPause的时候调这个方法 以便释放资源
      * @param context
      * @return
      */
     @Override
-    public FtSDK start(Activity context) {
+    public void start(Activity context) {
         this.context = context;
         if (type.value() == FtType.POPWINDOW.value()){//如果是窗口类型，那就是依赖于Activity的
 //            if ( !(context instanceof Activity)){
@@ -82,7 +95,6 @@ public class FtSDK implements FtBuilder{
         }else {
             FtService.getInstance().startService(context);
         }
-        return this;
     }
 
     /**
@@ -99,6 +111,16 @@ public class FtSDK implements FtBuilder{
             }
         }else{
             FtService.getInstance().stopService(context);
+        }
+    }
+
+    /**
+     * 如果是FtType.POPWINDOW 这里是释放资源
+     */
+    public static void release(){
+        if (popwindow!=null){
+            popwindow = null;
+            System.gc();
         }
     }
 

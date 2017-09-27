@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.phicomm.hu.Enum.FtType;
 import com.phicomm.hu.FtSDK;
 
 /**
@@ -20,13 +21,15 @@ public class Main2 extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        FtSDK.init().start(this);
+        FtSDK.init().setType(FtType.POPWINDOW).setTime(3).start(this);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        FtSDK.post();
+        if (hasFocus){
+            FtSDK.post();
+        }
     }
 
     @Override

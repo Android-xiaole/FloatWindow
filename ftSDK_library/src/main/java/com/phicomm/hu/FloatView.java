@@ -96,6 +96,7 @@ public class FloatView extends RelativeLayout implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (view == iv_close){
+            FtSDK.COUNT_TIME++;
             if (objContext instanceof FtService){
                 ((FtService)objContext).removeView();
             }
