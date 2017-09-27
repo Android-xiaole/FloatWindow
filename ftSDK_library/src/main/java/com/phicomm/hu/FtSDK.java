@@ -27,6 +27,7 @@ public class FtSDK implements FtBuilder{
     public static FloatPopwindow popwindow;
     private Activity context;
 
+
     /**
      * 获取单例
      */
